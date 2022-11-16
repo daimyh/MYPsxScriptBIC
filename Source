@@ -1,0 +1,90 @@
+--[[Templates:
+
+Window Create: local Window = Library.CreateLib("TITLE", "Ocean")
+Tab Create: local Tab = Window:NewTab("TabName")
+Create Section: local Section = Tab:NewSection("Section Name")
+Create Label: Section:NewLabel("LabelText")
+Create Button: 
+Section:NewButton("ButtonText", "ButtonInfo", function()
+    print("Clicked")
+end)
+Create Toggels:
+Section:NewToggle("ToggleText", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+Create Slider:
+Section:NewSlider("SliderText", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Create Textbox:
+Section:NewTextBox("TextboxText", "TextboxInfo", function(txt)
+	print(txt)
+end)
+Create Keybinds: Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+	print("You just clicked the bind")
+end)
+Toggle UI whit keybind:
+Section:NewKeybind("KeybindText", "KeybindInfo", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
+Create DropDown: 
+Section:NewDropdown("DropdownText", "DropdownInf", {"Option 1", "Option 2", "Option 3"}, function(currentOption)
+    print(currentOption)
+end)
+Create Color Picker:
+Section:NewColorPicker("Color Text", "Color Info", Color3.fromRGB(0,0,0), function(color)
+    print(color)
+    -- Second argument is the default color
+end)
+Custom Themes:
+local colors = {
+    SchemeColor = Color3.fromRGB(0,255,255),
+    Background = Color3.fromRGB(0, 0, 0),
+    Header = Color3.fromRGB(0, 0, 0),
+    TextColor = Color3.fromRGB(255,255,255),
+    ElementColor = Color3.fromRGB(20, 20, 20)
+}
+Change window to this:
+local Window = Library.CreateLib("TITLE", colors)
+]]
+
+
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/daimyh/EZgui/main/MainUiLibary"))()
+if game.PlaceId == 6284583030 then
+	local Window = library.CreateLib("BIC Script Hub [PSX]", "Ocean")
+
+	-- Coins
+	local CoinsDiamondsTab = Window:NewTab("Coins And Diamonds")
+	local CoinsDiamondsTabSection = CoinsDiamondsTab:NewSection("Coins And Dimaonds Spawner")
+	CoinsDiamondsTabSection:NewTextBox("Amount of Diamonds!", "Spawns Diamonds", function(txt)
+		local player = Game:GetService("Players").LocalPlayer
+
+		player.PlayerGui.Main.Right.Diamonds.Amount.Text = txt
+		player.leaderstats.Diamonds.Value = txt
+	end)
+	CoinsDiamondsTabSection:NewTextBox("Amount of Coins!", "Spawns Coins", function(txt)
+		local player = Game:GetService("Players").LocalPlayer
+
+		player.PlayerGui.Main.Right.Coins.Amount.Text = txt
+	end)
+	CoinsDiamondsTabSection:NewButton("Changes Diamonds to 1B", "Changes the diamonds to 1B!", function()
+		local player = Game:GetService("Players").LocalPlayer
+
+		player.PlayerGui.Main.Right.Diamonds.Amount.Text = "1B"
+		player.leaderstats.Diamonds.Value = 1000000000
+	end)
+	CoinsDiamondsTabSection:NewButton("Changes Coins to 1B", "Changes the diamonds to 1B!", function()
+		local player = Game:GetService("Players").LocalPlayer
+
+		player.PlayerGui.Main.Right.Coins.Amount.Text = "1B"
+	end)
+	CoinsDiamondsTabSection:NewSlider("WalkSpeed", "SliderInfo", 16, 500, function(s) -- 500 (MaxValue) | 0 (MinValue)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+	end)
+else
+	print("This game was not found!")
+end
