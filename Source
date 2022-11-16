@@ -59,7 +59,7 @@ if game.PlaceId == 6284583030 then
 
 	-- Coins
 	local CoinsDiamondsTab = Window:NewTab("Coins And Diamonds")
-	local CoinsDiamondsTabSection = CoinsDiamondsTab:NewSection("Coins And Dimaonds Spawner")
+	local CoinsDiamondsTabSection = CoinsDiamondsTab:NewSection("Coins And Dimaonds Spawner [VISIUAL]")
 	CoinsDiamondsTabSection:NewTextBox("Amount of Diamonds!", "Spawns Diamonds", function(txt)
 		local player = Game:GetService("Players").LocalPlayer
 
@@ -82,8 +82,22 @@ if game.PlaceId == 6284583030 then
 
 		player.PlayerGui.Main.Right.Coins.Amount.Text = "1B"
 	end)
-	CoinsDiamondsTabSection:NewSlider("WalkSpeed", "SliderInfo", 16, 500, function(s) -- 500 (MaxValue) | 0 (MinValue)
+	-- local player
+	local LocalPlayerTab = Window:NewTab("Local Player")
+	local LocalPlayerTabSection = LocalPlayerTab:NewSection("Stuff whit local player")
+
+	LocalPlayerTabSection:NewSlider("WalkSpeed", "Changes The Users WalkSpeed To Anything They Like!", 350, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
 		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+	end)
+	LocalPlayerTabSection:NewSlider("JumpPower", "Changes The Users JumpPower To Anything They Like!", 500, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+	end)
+		
+	-- settings
+	local SettingsTab = Window:NewTab("Settings")
+	local SettingsTabSection = SettingsTab:NewSection("Settings")
+	SettingsTabSection:NewKeybind("Toggle Ui", "Toggles The Gui", Enum.KeyCode.F, function()
+		library:ToggleUI()
 	end)
 else
 	print("This game was not found!")
